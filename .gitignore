@@ -26,3 +26,8 @@
 
 ### VS Code ###
 .vscode/
+
+### Maven ###
+.mvn
+
+.DS_Store 

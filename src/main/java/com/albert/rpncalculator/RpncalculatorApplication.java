@@ -5,10 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Profile;
 
 import java.util.Scanner;
 
 @SpringBootApplication
+@Profile("!test")
 public class RpncalculatorApplication implements CommandLineRunner {
 
 	@Autowired
@@ -23,8 +25,8 @@ public class RpncalculatorApplication implements CommandLineRunner {
 		try {
 			System.out.println("RPN caculator is running!");
 			System.out.println("You can input \'\\q\' or \'exit\' to stop");
-			Scanner scanner = new Scanner(System.in);
 
+			Scanner scanner = new Scanner(System.in);
 			while(scanner.hasNext()) {
 				String line = scanner.nextLine();
 				if(line.equalsIgnoreCase("\\q") || line.equalsIgnoreCase("exit")) {

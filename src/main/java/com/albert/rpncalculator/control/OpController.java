@@ -1,10 +1,9 @@
 package com.albert.rpncalculator.control;
 
-import com.albert.rpncalculator.annotation.OperatorClass;
+import com.albert.rpncalculator.annotation.SymbolOperatorClass;
 import com.albert.rpncalculator.op.NumericOperator;
-import com.albert.rpncalculator.op.Operator;
 import com.albert.rpncalculator.op.SymbolOperator;
-import com.albert.rpncalculator.storage.ResultStack;
+import com.albert.rpncalculator.storage.PreservableStack;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -16,7 +15,7 @@ import java.util.HashMap;
 @Service
 public class OpController {
 
-    private static HashMap<String, Operator> opMap = new HashMap<>();
+    private static HashMap<String, SymbolOperator> opMap = new HashMap<>();
 
     @Autowired
     private ApplicationContext applicationContext;
@@ -25,15 +24,15 @@ public class OpController {
     private CommandParser commandParser;
 
     @Autowired
-    private ResultStack resultStack;
+    private PreservableStack preservableStack;
 
     @Autowired
-    private NumericOperator newNumericOperator;
+    private NumericOperator numericOperator;
 
     @PostConstruct
     public void init() {
-         applicationContext.getBeansWithAnnotation(OperatorClass.class)
-                 .forEach((key, op) -> opMap.put(((SymbolOperator)op).getSymbol(), (Operator) op));
+         applicationContext.getBeansWithAnnotation(SymbolOperatorClass.class)
+                 .forEach((key, op) -> opMap.put(((SymbolOperator)op).getSymbol(), (SymbolOperator) op));
     }
 
     public String ProcessInput(String input) {
@@ -43,27 +42,23 @@ public class OpController {
         try {
             while((opStr = commandParser.getNext()) != null) {
                 if(NumberUtils.isCreatable(opStr)) {
-                    newNumericOperator.setNumber(opStr);
-                    newNumericOperator.operate();
+                    numericOperator.operate(opStr);
                 } else {
                     if(opMap.containsKey(opStr)) {
-                        Operator operator = opMap.get(opStr);
-                        operator.operate();
+                        SymbolOperator symbolOperator = opMap.get(opStr);
+                        symbolOperator.operate();
                     } else {
                         throw new Exception("This kind of operation is not supported!");
                     }
                 }
             }
         } catch (Exception ex) {
-            sb.append(getExceptionString(opStr, ex.getMessage()));
+            sb.append(OutputStringUtils.GetExceptionString(opStr, commandParser.getPosition(),ex.getMessage()));
             sb.append("\n");
         }
 
-        sb.append(resultStack.printStack());
+        sb.append(OutputStringUtils.GetStackContent(preservableStack));
         return sb.toString();
     }
 
-    private String getExceptionString(String operatorName, String message) {
-        return "operator " + operatorName + " (position: " + commandParser.getPosition() + "): " + message;
-    }
 }

@@ -1,14 +1,17 @@
-package com.albert.rpncalculator.op.impl;
+package com.albert.rpncalculator.op.symbolImpl;
 
-import com.albert.rpncalculator.annotation.OperatorClass;
+import com.albert.rpncalculator.annotation.SymbolOperatorClass;
 import com.albert.rpncalculator.op.SymbolOperator;
-import com.albert.rpncalculator.storage.ResultStack;
+import com.albert.rpncalculator.storage.PreservableStack;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@OperatorClass
+@SymbolOperatorClass
 @Component
 public class Undo implements SymbolOperator {
+
+    @Autowired
+    private PreservableStack preservableStack;
 
     private static final String SYMBOL = "undo";
 
@@ -19,6 +22,6 @@ public class Undo implements SymbolOperator {
 
     @Override
     public void operate() throws Exception {
-        //Undo operator class do nothing here, see StackBackupAspect.class
+        preservableStack.load();
     }
 }

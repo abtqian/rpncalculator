@@ -1,19 +1,19 @@
-package com.albert.rpncalculator.op.impl;
+package com.albert.rpncalculator.op.symbolImpl;
 
-import com.albert.rpncalculator.annotation.OperatorClass;
+import com.albert.rpncalculator.annotation.SymbolOperatorClass;
 import com.albert.rpncalculator.op.SymbolOperator;
-import com.albert.rpncalculator.storage.ResultStack;
+import com.albert.rpncalculator.storage.PreservableStack;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@OperatorClass
+@SymbolOperatorClass
 @Component
 public class Clear implements SymbolOperator {
 
     private static final String SYMBOL = "clear";
 
     @Autowired
-    private ResultStack resultStack;
+    private PreservableStack preservableStack;
 
     @Override
     public String getSymbol() {
@@ -22,6 +22,6 @@ public class Clear implements SymbolOperator {
 
     @Override
     public void operate() throws Exception {
-        resultStack.clear();
+        preservableStack.clear();
     }
 }
