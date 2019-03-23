@@ -7,7 +7,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayDeque;
 import java.util.Stack;
 
-@Component
+@Component(value = "preservableStack")
 @Scope("singleton")
 public class PreservableStack extends Stack<Double> implements Preservable {
 

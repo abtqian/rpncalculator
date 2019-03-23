@@ -20,7 +20,7 @@ public class Add extends AbstractCalculatonOperator {
 
     @Override
     protected Double calculate(List<Double> operandList) throws Exception {
-        return operandList.get(0) - operandList.get(1);
+        return operandList.get(0) + operandList.get(1);
     }
 
     @Override
