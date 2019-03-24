@@ -1,4 +1,5 @@
 # rpncalculator
+[![GitHub release](https://img.shields.io/badge/release-download-orange.svg)](https://github.com/abtqian/rpncalculator/releases/tag/v1.0.0)
 
 This is a RPN calculator written in JAVA.
 
