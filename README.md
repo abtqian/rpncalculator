@@ -29,7 +29,7 @@ stack: 1 2 -1
 > -
 stack: 1 3 
 > * 3 sqrt
-stack: 3 1.7320508076 
+stack: 3 1.7320508075
 > undo undo
 stack: 3 
 ```
