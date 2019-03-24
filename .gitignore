@@ -28,6 +28,5 @@
 .vscode/
 
 ### Maven ###
-.mvn
 
 .DS_Store 
