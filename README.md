@@ -1,6 +1,7 @@
 # rpncalculator
 [![GitHub release](https://img.shields.io/badge/release-download-orange.svg)](https://github.com/abtqian/rpncalculator/releases/tag/v1.0.0)
 [![Build Status](https://travis-ci.org/abtqian/rpncalculator.svg?branch=master)](https://travis-ci.org/abtqian/rpncalculator)
+[![Coverage Status](https://coveralls.io/repos/github/abtqian/rpncalculator/badge.svg)](https://coveralls.io/github/abtqian/rpncalculator)
 
 This is a RPN calculator written in JAVA.
 
